@@ -34,6 +34,18 @@ public class Main {
         return menuChoiceTemp;
     }
 
+    static int searchISBN(int search) {
+        int counter =0;
+        for (books i : myBookList) {
+            if (i.getISBN()==search) {
+                System.out.println(i.getISBN());
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    }
+
     static void a_addBook(){
         Scanner input = new Scanner(System.in);
 
@@ -42,7 +54,6 @@ public class Main {
 
         System.out.println("Enter book name: ");
         String name = input.next();
-        String bookName = name;
 
         System.out.println("Enter author: ");
         String author = input.next();
@@ -51,34 +62,79 @@ public class Main {
         String genre = input.next();
 
         books bookName = new books(ISBN, name, author, genre);
+        System.out.println(bookName.toString());
     }
     static void b_editBook() {
         Scanner input = new Scanner(System.in);
+        System.out.println("Please enter ISBN: ");
+        int index = searchISBN(input.nextInt());
+
+        if (index == -1) {
+            System.out.println("Could not find book.");
+            return;
+        }
+
+        books tempBook = myBookList.get(index);
+
+        System.out.println("Enter new ISBN: ");
+        tempBook.setISBN(input.nextInt());
+        System.out.println("Enter new book name: ");
+        tempBook.setBookName(input.next());
+        System.out.println("Enter new author name: ");
+        tempBook.setAuthorName(input.next());
+        System.out.println("Enter new genre: ");
+        tempBook.setGenre(input.next());
+
+        myBookList.set(index, tempBook);
+
+        /*
         System.out.println("Enter the name of which book you would like to edit: ");
-        //books bookToEdit = input.next();
 
         System.out.println("Enter ISBN: ");
         int ISBN = input.nextInt();
 
         System.out.println("Enter book name: ");
         String name = input.next();
-        //String bookName = name;
 
         System.out.println("Enter author: ");
         String author = input.next();
 
         System.out.println("Enter genre: ");
         String genre = input.next();
-
-        books bookToEdit = new books(ISBN, name, author, genre);
+         */
     }
     static void c_deleteBook() {
         Scanner input = new Scanner(System.in);
-        String bookToDel = input.next();
-        books bookToDel = null;
+
+        System.out.println("Enter ISBN:");
+        int ISBN = input.nextInt();
+
+        for (books i : myBookList) {
+            //System.out.println(i.getISBN());
+            if (i.getISBN() == ISBN) {
+                System.out.println(i.getISBN());
+                // make code to make indexes of book to null
+            }
+        }
     }
 
     static void _1addBorrow() {
+        Scanner input = new Scanner(System.in);
+        String borrower = input.next();
+        borrowers.add(borrower);
+    }
+    static void _2editBorrow() {
+        Scanner input = new Scanner(System.in);
+
+        for (books i : borrowers) {
+            //System.out.println(i.getISBN());
+            if (i.getISBN() == ISBN) {
+                System.out.println(i.getISBN());
+                // make code to make indexes of book to null
+            }
+
+    }
+    static void _3deleteBorrow() {
         Scanner input = new Scanner(System.in);
 
     }
@@ -87,7 +143,15 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ArrayList<String> borrowers = new ArrayList<String>();
         addDefaultBooks();
+
+        //String search = "WW2";
+        //for (books i : myBookList) {
+        //    if (i.getBookName().equals(search)) {
+        //       System.out.println(i.getBookName());
+        //    }
+
 
         System.out.println("Welcome to the Online Library!");
 
@@ -95,23 +159,26 @@ public class Main {
         if ( menuChoice.equals("a")) {
             a_addBook();
         }
-        if ( menuChoice.equals("b")) {
+        else if ( menuChoice.equals("b")) {
             b_editBook();
         }
-        if ( menuChoice.equals("c")) {
-            c_deleteBook();
+        else if ( menuChoice.equals("c")) {
+            //c_deleteBook();
         }
-        if ( menuChoice.equals("1")) {
+        else if ( menuChoice.equals("1")) {
             _1addBorrow();
         }
-        if ( menuChoice.equals("2")) {
-            //_2editBorrow();
+        else if ( menuChoice.equals("2")) {
+            _2editBorrow();
         }
-        if ( menuChoice.equals("3")) {
-            //_3deleteBorrow();
+        else if ( menuChoice.equals("3")) {
+            _3deleteBorrow();
         } else {
             System.out.println("Incorrect input. Please enter labeled options.");
         }
 
+        //for (books i : myBookList) {
+        //    System.out.println(i.getISBN());
+        //}
     }
 }
