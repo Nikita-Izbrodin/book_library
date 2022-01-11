@@ -19,6 +19,7 @@ public class Main {
     static String mainMenu() {
         System.out.println(
                         "Would you like to :" +
+                        "\n(X) View all books" +
                         "\n(A) Add a book" +
                         "\n(B) Edit a book" +
                         "\n(C) Delete a book" +
@@ -46,6 +47,21 @@ public class Main {
         return -1;
     }
 
+    static void allBooks() {
+        /*
+        for (books i : myBookList) {
+            System.out.print("\n");
+            System.out.println("ISBN: " + i.getISBN());
+            System.out.println("Book name: " + i.getBookName());
+            System.out.println("Author: " + i.getAuthorName());
+            System.out.println("Genre: " + i.getGenre());
+        }
+         */
+        for (int i = 0; i == myBookList.size(); i++) {
+            System.out.println(myBookList.get(i));
+        }
+    }
+
     static void a_addBook(){
         Scanner input = new Scanner(System.in);
 
@@ -64,6 +80,7 @@ public class Main {
         books bookName = new books(ISBN, name, author, genre);
         System.out.println(bookName.toString());
     }
+
     static void b_editBook() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter ISBN: ");
@@ -103,6 +120,7 @@ public class Main {
         String genre = input.next();
          */
     }
+
     static void c_deleteBook() {
         Scanner input = new Scanner(System.in);
 
@@ -123,17 +141,23 @@ public class Main {
         String borrower = input.next();
         borrowers.add(borrower);
     }
+
     static void _2editBorrow() {
         Scanner input = new Scanner(System.in);
-
+        /*
         for (books i : borrowers) {
             //System.out.println(i.getISBN());
+            System.out.println("Please enter ISBN: ");
+            int ISBN = input.nextInt();
             if (i.getISBN() == ISBN) {
                 System.out.println(i.getISBN());
                 // make code to make indexes of book to null
             }
+        }
 
+         */
     }
+
     static void _3deleteBorrow() {
         Scanner input = new Scanner(System.in);
 
@@ -156,14 +180,17 @@ public class Main {
         System.out.println("Welcome to the Online Library!");
 
         String menuChoice = mainMenu();
-        if ( menuChoice.equals("a")) {
+        if (menuChoice.equals("x")) {
+            allBooks();
+        }
+        else if ( menuChoice.equals("a")) {
             a_addBook();
         }
         else if ( menuChoice.equals("b")) {
             b_editBook();
         }
         else if ( menuChoice.equals("c")) {
-            //c_deleteBook();
+            c_deleteBook();
         }
         else if ( menuChoice.equals("1")) {
             _1addBorrow();
