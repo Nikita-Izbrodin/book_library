@@ -12,8 +12,8 @@ public class Main {
 
         books Castle = new books(7777, "Castle", "Nick#2", "horror");
 
-        myBookList.add(WW2);
-        myBookList.add(Castle);
+        bookList.add(WW2);
+        bookList.add(Castle);
     }
 
     static String mainMenu() {
@@ -37,7 +37,7 @@ public class Main {
 
     static int searchISBN(int search) {
         int counter =0;
-        for (books i : myBookList) {
+        for (books i : bookList) {
             if (i.getISBN()==search) {
                 System.out.println(i.getISBN());
                 return counter;
@@ -48,17 +48,8 @@ public class Main {
     }
 
     static void allBooks() {
-        /*
-        for (books i : myBookList) {
-            System.out.print("\n");
-            System.out.println("ISBN: " + i.getISBN());
-            System.out.println("Book name: " + i.getBookName());
-            System.out.println("Author: " + i.getAuthorName());
-            System.out.println("Genre: " + i.getGenre());
-        }
-         */
-        for (int i = 0; i == myBookList.size(); i++) {
-            System.out.println(myBookList.get(i));
+        for (int i = 0; i == bookList.size(); i++) {
+            System.out.println(bookList.get(i));
         }
     }
 
@@ -91,7 +82,7 @@ public class Main {
             return;
         }
 
-        books tempBook = myBookList.get(index);
+        books tempBook = bookList.get(index);
 
         System.out.println("Enter new ISBN: ");
         tempBook.setISBN(input.nextInt());
@@ -102,23 +93,8 @@ public class Main {
         System.out.println("Enter new genre: ");
         tempBook.setGenre(input.next());
 
-        myBookList.set(index, tempBook);
+        bookList.set(index, tempBook);
 
-        /*
-        System.out.println("Enter the name of which book you would like to edit: ");
-
-        System.out.println("Enter ISBN: ");
-        int ISBN = input.nextInt();
-
-        System.out.println("Enter book name: ");
-        String name = input.next();
-
-        System.out.println("Enter author: ");
-        String author = input.next();
-
-        System.out.println("Enter genre: ");
-        String genre = input.next();
-         */
     }
 
     static void c_deleteBook() {
@@ -127,7 +103,7 @@ public class Main {
         System.out.println("Enter ISBN:");
         int ISBN = input.nextInt();
 
-        for (books i : myBookList) {
+        for (books i : bookList) {
             //System.out.println(i.getISBN());
             if (i.getISBN() == ISBN) {
                 System.out.println(i.getISBN());
@@ -138,24 +114,31 @@ public class Main {
 
     static void _1addBorrow() {
         Scanner input = new Scanner(System.in);
-        String borrower = input.next();
-        borrowers.add(borrower);
+
+        System.out.println("Enter name: ");
+        String name = input.next();
+
+        System.out.println("Enter userID: ");
+        String userID = input.next();
+
+        borrowers borrower = new borrowers(name, userID);
+        System.out.println("Borrower added.");
+        System.out.println(borrower.toString());
     }
 
     static void _2editBorrow() {
         Scanner input = new Scanner(System.in);
-        /*
-        for (books i : borrowers) {
+
+        for (borrowers i : borrowersList) {
             //System.out.println(i.getISBN());
             System.out.println("Please enter ISBN: ");
-            int ISBN = input.nextInt();
-            if (i.getISBN() == ISBN) {
-                System.out.println(i.getISBN());
+            int userID = input.nextInt();
+            if (i.getUserID().equals(userID)) {
+                System.out.println(i.userID);
                 // make code to make indexes of book to null
             }
         }
 
-         */
     }
 
     static void _3deleteBorrow() {
@@ -163,19 +146,14 @@ public class Main {
 
     }
 
-    private static ArrayList<books> myBookList = new ArrayList<>();
+    private static ArrayList<books> bookList = new ArrayList<>();
+    private static ArrayList<borrowers> borrowersList = new ArrayList<>();
 
     public static void main(String[] args) {
 
-        ArrayList<String> borrowers = new ArrayList<String>();
         addDefaultBooks();
 
-        //String search = "WW2";
-        //for (books i : myBookList) {
-        //    if (i.getBookName().equals(search)) {
-        //       System.out.println(i.getBookName());
-        //    }
-
+        ArrayList<String> borrowers = new ArrayList<String>();
 
         System.out.println("Welcome to the Online Library!");
 
@@ -203,9 +181,41 @@ public class Main {
         } else {
             System.out.println("Incorrect input. Please enter labeled options.");
         }
-
-        //for (books i : myBookList) {
-        //    System.out.println(i.getISBN());
-        //}
     }
 }
+
+//for (books i : myBookList) {
+//    System.out.println(i.getISBN());
+//}
+
+//String search = "WW2";
+//for (books i : myBookList) {
+//    if (i.getBookName().equals(search)) {
+//       System.out.println(i.getBookName());
+//    }
+
+/*
+        for (books i : myBookList) {
+            System.out.print("\n");
+            System.out.println("ISBN: " + i.getISBN());
+            System.out.println("Book name: " + i.getBookName());
+            System.out.println("Author: " + i.getAuthorName());
+            System.out.println("Genre: " + i.getGenre());
+        }
+         */
+
+/*
+        System.out.println("Enter the name of which book you would like to edit: ");
+
+        System.out.println("Enter ISBN: ");
+        int ISBN = input.nextInt();
+
+        System.out.println("Enter book name: ");
+        String name = input.next();
+
+        System.out.println("Enter author: ");
+        String author = input.next();
+
+        System.out.println("Enter genre: ");
+        String genre = input.next();
+         */
