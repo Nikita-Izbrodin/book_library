@@ -48,10 +48,11 @@ public class Main {
     }
 
     static void allBooks() {
-        for (int i = 0; i == bookList.size(); i++) {
+        for (int i = 0; i < bookList.size(); i++) {
             System.out.println(bookList.get(i));
         }
-    }
+        System.out.println();
+    } // done
 
     static void a_addBook(){
         Scanner input = new Scanner(System.in);
@@ -69,16 +70,18 @@ public class Main {
         String genre = input.next();
 
         books bookName = new books(ISBN, name, author, genre);
-        System.out.println(bookName.toString());
-    }
+        bookList.add(bookName);
+        System.out.println(bookName.toString() + "\n");
+    } //done
 
     static void b_editBook() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter ISBN: ");
         int index = searchISBN(input.nextInt());
+        System.out.println("Book found.");
 
         if (index == -1) {
-            System.out.println("Could not find book.");
+            System.out.println("Could not find book.\n");
             return;
         }
 
@@ -94,8 +97,8 @@ public class Main {
         tempBook.setGenre(input.next());
 
         bookList.set(index, tempBook);
-
-    }
+        System.out.println("New book added.\n");
+    } //done
 
     static void c_deleteBook() {
         Scanner input = new Scanner(System.in);
@@ -157,29 +160,27 @@ public class Main {
 
         System.out.println("Welcome to the Online Library!");
 
-        String menuChoice = mainMenu();
-        if (menuChoice.equals("x")) {
-            allBooks();
-        }
-        else if ( menuChoice.equals("a")) {
-            a_addBook();
-        }
-        else if ( menuChoice.equals("b")) {
-            b_editBook();
-        }
-        else if ( menuChoice.equals("c")) {
-            c_deleteBook();
-        }
-        else if ( menuChoice.equals("1")) {
-            _1addBorrow();
-        }
-        else if ( menuChoice.equals("2")) {
-            _2editBorrow();
-        }
-        else if ( menuChoice.equals("3")) {
-            _3deleteBorrow();
-        } else {
-            System.out.println("Incorrect input. Please enter labeled options.");
+        boolean run = true;
+
+        while (run == true) {
+            String menuChoice = mainMenu();
+            if (menuChoice.equals("x")) {
+                allBooks();
+            } else if (menuChoice.equals("a")) {
+                a_addBook();
+            } else if (menuChoice.equals("b")) {
+                b_editBook();
+            } else if (menuChoice.equals("c")) {
+                c_deleteBook();
+            } else if (menuChoice.equals("1")) {
+                _1addBorrow();
+            } else if (menuChoice.equals("2")) {
+                _2editBorrow();
+            } else if (menuChoice.equals("3")) {
+                _3deleteBorrow();
+            } else {
+                System.out.println("Incorrect input. Please enter labeled options.");
+            }
         }
     }
 }
