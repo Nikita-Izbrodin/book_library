@@ -3,9 +3,9 @@ package com.company;
 public class borrowers {
 
     String name;
-    String userID;
+    int userID;
 
-    public borrowers(String name, String userID) {
+    public borrowers(String name, int userID) {
         this.name = name;
         this.userID = userID;
     }
@@ -26,11 +26,11 @@ public class borrowers {
         this.name = name;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 }

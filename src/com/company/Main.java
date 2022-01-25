@@ -3,6 +3,7 @@ package com.company;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
 
@@ -14,7 +15,7 @@ public class Main {
 
         bookList.add(WW2);
         bookList.add(Castle);
-    }
+    } //done
 
     static String mainMenu() {
         System.out.println(
@@ -24,6 +25,7 @@ public class Main {
                         "\n(B) Edit a book" +
                         "\n(C) Delete a book" +
                         "\n" +
+                        "\n(Q) View all borrowers" +
                         "\n(1) Add a borrower" +
                         "\n(2) Edit a borrower" +
                         "\n(3) Delete a borrower" +
@@ -33,7 +35,7 @@ public class Main {
         String menuChoiceTemp = input.next().toLowerCase(Locale.ROOT);
         //System.out.println(menuChoiceTemp); //test to see if scanner works
         return menuChoiceTemp;
-    }
+    } //done
 
     static int searchISBN(int search) {
         int counter =0;
@@ -45,14 +47,14 @@ public class Main {
             counter++;
         }
         return -1;
-    }
+    } //done
 
     static void allBooks() {
         for (int i = 0; i < bookList.size(); i++) {
             System.out.println(bookList.get(i));
         }
         System.out.println();
-    } // done
+    } //done
 
     static void a_addBook(){
         Scanner input = new Scanner(System.in);
@@ -107,13 +109,19 @@ public class Main {
         int ISBN = input.nextInt();
 
         for (books i : bookList) {
-            //System.out.println(i.getISBN());
             if (i.getISBN() == ISBN) {
-                System.out.println(i.getISBN());
-                // make code to make indexes of book to null
+                bookList.remove(i);
+                System.out.println("Book removed successfully.");
             }
         }
-    }
+    } //done
+
+    static void allBorrowers() {
+        for (int i = 0; i < borrowersList.size(); i++) {
+            System.out.println(borrowersList.get(i));
+        }
+        System.out.println();
+    } //done
 
     static void _1addBorrow() {
         Scanner input = new Scanner(System.in);
@@ -121,13 +129,15 @@ public class Main {
         System.out.println("Enter name: ");
         String name = input.next();
 
-        System.out.println("Enter userID: ");
-        String userID = input.next();
+        Random rand = new Random();
+        int userID = rand.nextInt(10000);
+        System.out.println(userID);
 
         borrowers borrower = new borrowers(name, userID);
+        borrowersList.add(borrower);
         System.out.println("Borrower added.");
         System.out.println(borrower.toString());
-    }
+    } //done
 
     static void _2editBorrow() {
         Scanner input = new Scanner(System.in);
@@ -136,7 +146,7 @@ public class Main {
             //System.out.println(i.getISBN());
             System.out.println("Please enter ISBN: ");
             int userID = input.nextInt();
-            if (i.getUserID().equals(userID)) {
+            if (i.getUserID()== userID) {
                 System.out.println(i.userID);
                 // make code to make indexes of book to null
             }
@@ -172,6 +182,8 @@ public class Main {
                 b_editBook();
             } else if (menuChoice.equals("c")) {
                 c_deleteBook();
+            } else if (menuChoice.equals("q")) {
+                allBorrowers();
             } else if (menuChoice.equals("1")) {
                 _1addBorrow();
             } else if (menuChoice.equals("2")) {
