@@ -29,6 +29,7 @@ public class Main {
                         "\n(1) Add a borrower" +
                         "\n(2) Edit a borrower" +
                         "\n(3) Delete a borrower" +
+                        "\n(W) Exit" +
                         "\n");
 
         Scanner input = new Scanner(System.in);
@@ -219,45 +220,11 @@ public class Main {
                 _2editBorrow();
             } else if (menuChoice.equals("3")) {
                 _3deleteBorrow();
+            } else if (menuChoice.equals("w")) {
+                run = false;
             } else {
                 System.out.println("Incorrect input. Please enter labeled options.");
             }
         }
     }
 }
-
-//for (books i : myBookList) {
-//    System.out.println(i.getISBN());
-//}
-
-//String search = "WW2";
-//for (books i : myBookList) {
-//    if (i.getBookName().equals(search)) {
-//       System.out.println(i.getBookName());
-//    }
-
-/*
-        for (books i : myBookList) {
-            System.out.print("\n");
-            System.out.println("ISBN: " + i.getISBN());
-            System.out.println("Book name: " + i.getBookName());
-            System.out.println("Author: " + i.getAuthorName());
-            System.out.println("Genre: " + i.getGenre());
-        }
-         */
-
-/*
-        System.out.println("Enter the name of which book you would like to edit: ");
-
-        System.out.println("Enter ISBN: ");
-        int ISBN = input.nextInt();
-
-        System.out.println("Enter book name: ");
-        String name = input.next();
-
-        System.out.println("Enter author: ");
-        String author = input.next();
-
-        System.out.println("Enter genre: ");
-        String genre = input.next();
-         */
