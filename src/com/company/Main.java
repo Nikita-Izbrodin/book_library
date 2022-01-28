@@ -49,6 +49,18 @@ public class Main {
         return -1;
     } //done
 
+    static int searchID(int search) {
+        int counter =0;
+        for (borrowers i : borrowersList) {
+            if (i.getUserID()==search) {
+                System.out.println(i.getUserID());
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    } //done
+
     static void allBooks() {
         for (int i = 0; i < bookList.size(); i++) {
             System.out.println(bookList.get(i));
@@ -140,24 +152,41 @@ public class Main {
     } //done
 
     static void _2editBorrow() {
-        Scanner input = new Scanner(System.in);
+            Scanner input = new Scanner(System.in);
+            System.out.println("Please enter User ID: ");
+            int index = searchID(input.nextInt());
+            System.out.println("User found.");
 
-        for (borrowers i : borrowersList) {
-            //System.out.println(i.getISBN());
-            System.out.println("Please enter ISBN: ");
-            int userID = input.nextInt();
-            if (i.getUserID()== userID) {
-                System.out.println(i.userID);
-                // make code to make indexes of book to null
+            if (index == -1) {
+                System.out.println("Could not find user.\n");
+                return;
             }
-        }
 
-    }
+            borrowers tempBorrower = borrowersList.get(index);
+
+            System.out.println("Enter new User ID: ");
+            tempBorrower.setUserID(input.nextInt());
+            System.out.println("Enter new name: ");
+            tempBorrower.setName(input.next());
+
+            borrowersList.set(index, tempBorrower);
+            System.out.println("User edit successful.\n");
+    } //done
 
     static void _3deleteBorrow() {
         Scanner input = new Scanner(System.in);
 
-    }
+        System.out.println("Enter user ID:");
+        int userID = input.nextInt();
+
+        for (borrowers i : borrowersList) {
+            if (i.getUserID() == userID) {
+                borrowersList.remove(i);
+                System.out.println("User removed successfully.");
+                return;
+            }
+        }
+    } //done
 
     private static ArrayList<books> bookList = new ArrayList<>();
     private static ArrayList<borrowers> borrowersList = new ArrayList<>();
