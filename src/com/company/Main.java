@@ -15,7 +15,7 @@ public class Main {
 
         bookList.add(WW2);
         bookList.add(Castle);
-    } //done
+    }
 
     static String mainMenu() {
         System.out.println(
@@ -36,7 +36,7 @@ public class Main {
         String menuChoiceTemp = input.next().toLowerCase(Locale.ROOT);
         //System.out.println(menuChoiceTemp); //test to see if scanner works
         return menuChoiceTemp;
-    } //done
+    }
 
     static int searchISBN(int search) {
         int counter =0;
@@ -48,7 +48,7 @@ public class Main {
             counter++;
         }
         return -1;
-    } //done
+    }
 
     static int searchID(int search) {
         int counter =0;
@@ -60,99 +60,132 @@ public class Main {
             counter++;
         }
         return -1;
-    } //done
+    }
 
-    static void allBooks() {
+    static void allBooks() throws InterruptedException {
         for (int i = 0; i < bookList.size(); i++) {
             System.out.println(bookList.get(i));
         }
         System.out.println();
-    } //done
+        Thread.sleep(2000);
+    }
 
-    static void a_addBook(){
+    static void a_addBook() throws InterruptedException {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter ISBN: ");
-        int ISBN = input.nextInt();
+        try {
+            int ISBN = input.nextInt();
 
-        System.out.println("Enter book name: ");
-        String name = input.next();
+            System.out.println("Enter book name: ");
+            String name = input.next();
 
-        System.out.println("Enter author: ");
-        String author = input.next();
+            System.out.println("Enter author: ");
+            String author = input.next();
 
-        System.out.println("Enter genre: ");
-        String genre = input.next();
+            System.out.println("Enter genre: ");
+            String genre = input.next();
 
-        books bookName = new books(ISBN, name, author, genre);
-        bookList.add(bookName);
-        System.out.println(bookName.toString() + "\n");
-    } //done
+            books bookName = new books(ISBN, name, author, genre);
+            bookList.add(bookName);
+            System.out.println(bookName.toString() + "\n");
+            Thread.sleep(2000);
+        }
+        catch(Exception e) {
+            System.out.println("Invalid input. Please enter a number.");
+            Thread.sleep(2000);
+        }
+    }
 
-    static void b_editBook() {
+    static void b_editBook() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter ISBN: ");
-        int index = searchISBN(input.nextInt());
-        System.out.println("Book found.");
+        try {
+            int index = searchISBN(input.nextInt());
 
-        if (index == -1) {
-            System.out.println("Could not find book.\n");
-            return;
+            System.out.println("Book found.");
+
+            if (index == -1) {
+                System.out.println("Could not find book.\n");
+                Thread.sleep(2000);
+                return;
+            }
+
+            books tempBook = bookList.get(index);
+
+            System.out.println("Enter new ISBN: ");
+            tempBook.setISBN(input.nextInt());
+            System.out.println("Enter new book name: ");
+            tempBook.setBookName(input.next());
+            System.out.println("Enter new author name: ");
+            tempBook.setAuthorName(input.next());
+            System.out.println("Enter new genre: ");
+            tempBook.setGenre(input.next());
+
+            bookList.set(index, tempBook);
+            System.out.println("Book edited.\n");
+            Thread.sleep(2000);
+
         }
+        catch(Exception e){
+            System.out.println("Invalid input. Please enter numbers.");
+            Thread.sleep(2000);
+        }
+    }
 
-        books tempBook = bookList.get(index);
-
-        System.out.println("Enter new ISBN: ");
-        tempBook.setISBN(input.nextInt());
-        System.out.println("Enter new book name: ");
-        tempBook.setBookName(input.next());
-        System.out.println("Enter new author name: ");
-        tempBook.setAuthorName(input.next());
-        System.out.println("Enter new genre: ");
-        tempBook.setGenre(input.next());
-
-        bookList.set(index, tempBook);
-        System.out.println("New book added.\n");
-    } //done
-
-    static void c_deleteBook() {
+    static void c_deleteBook() throws InterruptedException {
         Scanner input = new Scanner(System.in);
+        try {
+            System.out.println("Enter ISBN:");
+            int ISBN = input.nextInt();
 
-        System.out.println("Enter ISBN:");
-        int ISBN = input.nextInt();
-
-        for (books i : bookList) {
-            if (i.getISBN() == ISBN) {
-                bookList.remove(i);
-                System.out.println("Book removed successfully.");
+            for (books i : bookList) {
+                if (i.getISBN() == ISBN) {
+                    bookList.remove(i);
+                    System.out.println("Book removed successfully.");
+                    Thread.sleep(2000);
+                }
             }
         }
-    } //done
+        catch(Exception e) {
+            System.out.println("Invalid input. Please enter a number.");
+            Thread.sleep(2000);
+        }
+    }
 
-    static void allBorrowers() {
+
+    static void allBorrowers() throws InterruptedException {
         for (int i = 0; i < borrowersList.size(); i++) {
             System.out.println(borrowersList.get(i));
         }
         System.out.println();
-    } //done
+        Thread.sleep(2000);
+    }
 
-    static void _1addBorrow() {
+    static void _1addBorrow() throws InterruptedException {
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter name: ");
-        String name = input.next();
+        try {
+            System.out.println("Enter name: ");
+            String name = input.next();
 
-        Random rand = new Random();
-        int userID = rand.nextInt(10000);
-        System.out.println(userID);
+            Random rand = new Random();
+            int userID = rand.nextInt(10000);
+            System.out.println(userID);
 
-        borrowers borrower = new borrowers(name, userID);
-        borrowersList.add(borrower);
-        System.out.println("Borrower added.");
-        System.out.println(borrower.toString());
-    } //done
+            borrowers borrower = new borrowers(name, userID);
+            borrowersList.add(borrower);
+            System.out.println("Borrower added.");
+            System.out.println(borrower.toString());
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+            System.out.println("Invalid input.");
+        }
+    }
 
-    static void _2editBorrow() {
+    static void _2editBorrow() throws InterruptedException {
+        try{
             Scanner input = new Scanner(System.in);
             System.out.println("Please enter User ID: ");
             int index = searchID(input.nextInt());
@@ -160,6 +193,7 @@ public class Main {
 
             if (index == -1) {
                 System.out.println("Could not find user.\n");
+                Thread.sleep(2000);
                 return;
             }
 
@@ -172,27 +206,38 @@ public class Main {
 
             borrowersList.set(index, tempBorrower);
             System.out.println("User edit successful.\n");
-    } //done
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+            System.out.println("Invalid input.");
+        }
+    }
 
-    static void _3deleteBorrow() {
-        Scanner input = new Scanner(System.in);
+    static void _3deleteBorrow() throws InterruptedException {
+        try{
+            Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter user ID:");
-        int userID = input.nextInt();
+            System.out.println("Enter user ID:");
+            int userID = input.nextInt();
 
-        for (borrowers i : borrowersList) {
-            if (i.getUserID() == userID) {
-                borrowersList.remove(i);
-                System.out.println("User removed successfully.");
-                return;
+            for (borrowers i : borrowersList) {
+                if (i.getUserID() == userID) {
+                    borrowersList.remove(i);
+                    System.out.println("User removed successfully.");
+                    Thread.sleep(2000);
+                    return;
+                }
             }
         }
-    } //done
+        catch(Exception e){
+            System.out.println("Invalid input.");
+        }
+    }
 
     private static ArrayList<books> bookList = new ArrayList<>();
     private static ArrayList<borrowers> borrowersList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         addDefaultBooks();
 
